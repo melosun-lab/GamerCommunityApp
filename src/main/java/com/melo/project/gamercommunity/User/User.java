@@ -12,6 +12,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import javax.persistence.Embedded;
 
 
 @Getter
@@ -38,14 +39,9 @@ public class User {
     @NotBlank(message = "Password is required")
     private String password;
 
-    @NotBlank(message = "Country is required")
-    private String country;
+    @Embedded
+    private Address address;
 
-    @NotBlank(message = "State is required")
-    private String state;
-
-    @NotBlank(message = "City is required")
-    private String city;
 
     @NotBlank(message = "Gender is required")
     private String gender;
