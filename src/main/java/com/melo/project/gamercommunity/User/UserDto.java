@@ -1,9 +1,7 @@
 package com.melo.project.gamercommunity.User;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -13,6 +11,8 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 @ToString
+@AllArgsConstructor
+@Builder
 public class UserDto {
 
     private Long id;

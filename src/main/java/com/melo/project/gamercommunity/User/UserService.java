@@ -1,5 +1,6 @@
 package com.melo.project.gamercommunity.User;
 
+import com.melo.project.gamercommunity.Mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,82 +15,18 @@ public class UserService {
     }
 
     public UserDto getUserByEmail(String email){
-        User user = userRepository.findUserByEmail(email);
-        UserDto userDto = new UserDto();
-        userDto.setId(user.getId());
-        userDto.setName(user.getName());
-        userDto.setSurname(user.getSurname());
-        userDto.setEmail(user.getEmail());
-
-        return userDto;
+        return UserMapper.from(userRepository.findUserByEmail(email));
     }
 
     public UserDto updateUser(UserDto userDto){
-        User user = new User();
-        user.setId(userDto.getId());
-        user.setName(userDto.getName());
-        user.setSurname(userDto.getSurname());
-        user.setEmail(userDto.getEmail());
-        user.setPassword("pw");
-        user.setAddress(new Address(userDto.getCountry(), userDto.getState(), userDto.getCity()));
-        user.setGender(userDto.getGender());
-        user.setDateOfBirth(userDto.getDateOfBirth());
-
-        User updatedUser = userRepository.save(user);
-
-        UserDto updatedUserDto = new UserDto();
-        updatedUserDto.setId(updatedUser.getId());
-        updatedUserDto.setName(updatedUser.getName());
-        updatedUserDto.setSurname(updatedUser.getSurname());
-        updatedUserDto.setEmail(updatedUser.getEmail());
-        updatedUserDto.setCountry(updatedUser.getAddress().getCountry());
-        updatedUserDto.setState(updatedUser.getAddress().getState());
-        updatedUserDto.setCity(updatedUser.getAddress().getCity());
-        updatedUserDto.setGender(updatedUser.getGender());
-        updatedUserDto.setDateOfBirth(updatedUser.getDateOfBirth());
-
-        return updatedUserDto;
+        return UserMapper.from(userRepository.save(UserMapper.from(userDto)));
     }
 
     public UserDto getUserById(Long id){
-        User user = userRepository.findUserById(id);
-        UserDto userDto = new UserDto();
-        userDto.setId(user.getId());
-        userDto.setName(user.getName());
-        userDto.setSurname(user.getSurname());
-        userDto.setEmail(user.getEmail());
-        userDto.setCountry(user.getAddress().getCountry());
-        userDto.setState(user.getAddress().getState());
-        userDto.setCity(user.getAddress().getCity());
-        userDto.setGender(user.getGender());
-        userDto.setDateOfBirth(user.getDateOfBirth());
-        return userDto;
+        return UserMapper.from(userRepository.findUserById(id));
     }
 
     public UserDto createUser(UserDto userDto){
-        User user = new User();
-        user.setId(userDto.getId());
-        user.setName(userDto.getName());
-        user.setSurname(userDto.getSurname());
-        user.setEmail(userDto.getEmail());
-        user.setPassword(userDto.getPassword());
-        user.setAddress(new Address(userDto.getCountry(), userDto.getState(), userDto.getCity()));
-        user.setGender(userDto.getGender());
-        user.setDateOfBirth(userDto.getDateOfBirth());
-
-        User updatedUser = userRepository.save(user);
-
-        UserDto updatedUserDto = new UserDto();
-        updatedUserDto.setId(updatedUser.getId());
-        updatedUserDto.setName(updatedUser.getName());
-        updatedUserDto.setSurname(updatedUser.getSurname());
-        updatedUserDto.setEmail(updatedUser.getEmail());
-        updatedUserDto.setCountry(updatedUser.getAddress().getCountry());
-        updatedUserDto.setState(updatedUser.getAddress().getState());
-        updatedUserDto.setCity(updatedUser.getAddress().getCity());
-        updatedUserDto.setGender(updatedUser.getGender());
-        updatedUserDto.setDateOfBirth(updatedUser.getDateOfBirth());
-
-        return updatedUserDto;
+        return UserMapper.from(userRepository.save(UserMapper.from(userDto)));
     }
 }

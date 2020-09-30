@@ -1,5 +1,6 @@
 package com.melo.project.gamercommunity.Hobby;
 
+import com.melo.project.gamercommunity.Mapper.HobbyMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,34 +14,14 @@ public class HobbyService {
     HobbyRepository hobbyRepository;
 
     public void addHobby(HobbyDto hobbyDto){
-        Hobby hobby = new Hobby();
-        hobby.setUserId(hobbyDto.getUserId());
-        hobby.setName(hobbyDto.getName());
-
-        hobbyRepository.save(hobby);
+        hobbyRepository.save(HobbyMapper.from(hobbyDto));
     }
 
     public List<HobbyDto> getAllHobby(Long userId){
-        List<Hobby> hobbyList = hobbyRepository.getAllByUserId(userId);
-
-        List<HobbyDto> hobbyDtosList = new ArrayList<>();
-
-        for(Hobby hobby : hobbyList){
-            HobbyDto hobbyDto = new HobbyDto();
-            hobbyDto.setId(hobby.getId());
-            hobbyDto.setName(hobby.getName());
-            hobbyDto.setUserId(hobby.getUserId());
-            hobbyDtosList.add(hobbyDto);
-        }
-        return hobbyDtosList;
+        return HobbyMapper.from(hobbyRepository.getAllByUserId(userId));
     }
 
-    public void deleteHobby(@Valid Hobby hobbyDto){
-        Hobby hobby = new Hobby();
-        hobby.setId(hobbyDto.getId());
-        hobby.setUserId(hobbyDto.getUserId());
-        hobby.setName(hobbyDto.getName());
-
-        hobbyRepository.delete(hobby);
+    public void deleteHobby(@Valid HobbyDto hobbyDto){
+        hobbyRepository.delete(HobbyMapper.from(hobbyDto));
     }
 }

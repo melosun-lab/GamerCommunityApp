@@ -1,10 +1,6 @@
 package com.melo.project.gamercommunity.User;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.Embeddable;
 import javax.validation.constraints.NotBlank;
@@ -14,6 +10,7 @@ import javax.validation.constraints.NotBlank;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @ToString
 public class Address {
 

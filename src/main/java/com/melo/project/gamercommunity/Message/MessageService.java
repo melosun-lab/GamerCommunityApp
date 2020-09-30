@@ -1,5 +1,6 @@
 package com.melo.project.gamercommunity.Message;
 
+import com.melo.project.gamercommunity.Mapper.MessageMapper;
 import com.melo.project.gamercommunity.User.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,26 +20,12 @@ public class MessageService {
     UserService userService;
 
     public void sendMessage(MessageDto messageDto){
-        Message message = new Message();
-        message.setFromUserId(messageDto.getFromUserId());
-        message.setToUserId(messageDto.getToUserId());
-        message.setMessageContent(messageDto.getMessageContent());
-        message.setDateSentTime(LocalDateTime.now());
-
-        messageRepository.save(message);
+        messageRepository.save(MessageMapper.from(messageDto));
     }
 
     public List<MessageDto> getMessage(String email, Long friendId){
         Long userId = userService.getUserIdByEmail(email);
         List<Message> messageList = messageRepository.getAllByUserIdAndFriendId(userId, friendId);
-        List<MessageDto> messageDtoList = new ArrayList();
-        for (Message message: messageList) {
-            MessageDto messageDto = new MessageDto();
-            messageDto.setFromUserId(userId);
-            messageDto.setToUserId(friendId);
-            messageDto.setMessageContent(message.getMessageContent());
-            messageDtoList.add(messageDto);
-        }
-        return messageDtoList;
+        return MessageMapper.from(messageList);
     }
 }

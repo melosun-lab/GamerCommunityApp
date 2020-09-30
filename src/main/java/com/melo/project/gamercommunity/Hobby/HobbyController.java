@@ -25,7 +25,7 @@ public class HobbyController {
     }
 
     @DeleteMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void deleteHobby(@RequestBody @Valid Hobby hobbyDto){
+    public void deleteHobby(@RequestBody @Valid HobbyDto hobbyDto){
         hobbyService.deleteHobby(hobbyDto);
     }
 }
