@@ -1,5 +1,6 @@
 package com.melo.project.gamercommunity.Register;
 
+import com.melo.project.gamercommunity.Exception.InvalidUserException;
 import com.melo.project.gamercommunity.User.User;
 import com.melo.project.gamercommunity.User.UserDto;
 
@@ -20,7 +21,7 @@ public class RegisterController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public UserDto registerUser(@RequestBody @Valid UserDto userDto){
+    public UserDto registerUser(@RequestBody @Valid UserDto userDto) throws InvalidUserException {
         return registerService.registerUser(userDto);
     }
 }

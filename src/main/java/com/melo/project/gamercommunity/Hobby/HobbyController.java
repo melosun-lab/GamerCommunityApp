@@ -1,5 +1,6 @@
 package com.melo.project.gamercommunity.Hobby;
 
+import com.melo.project.gamercommunity.Exception.InvalidHobbyException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +16,7 @@ public class HobbyController {
     HobbyService hobbyService;
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void addHobby(@RequestBody @Valid HobbyDto hobbyDto){
+    public void addHobby(@RequestBody @Valid HobbyDto hobbyDto) throws InvalidHobbyException {
         hobbyService.addHobby(hobbyDto);
     }
 
