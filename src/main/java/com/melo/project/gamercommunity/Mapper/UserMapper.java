@@ -5,6 +5,9 @@ import com.melo.project.gamercommunity.User.Address;
 import com.melo.project.gamercommunity.User.User;
 import com.melo.project.gamercommunity.User.UserDto;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class UserMapper {
     public static User from(UserDto userDto){
         return User.builder()
@@ -35,5 +38,11 @@ public class UserMapper {
                 .gender(user.getGender())
                 .dateOfBirth(user.getDateOfBirth())
                 .build();
+    }
+
+    public static List<UserDto> from(List<User> userList) {
+        return userList.stream()
+                .map(UserMapper::from)
+                .collect(Collectors.toList());
     }
 }
