@@ -6,6 +6,7 @@ import com.melo.project.gamercommunity.User.User;
 import com.melo.project.gamercommunity.User.UserDto;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class UserMapper {
@@ -27,7 +28,8 @@ public class UserMapper {
     }
 
     public static UserDto from(User user){
-        return UserDto.builder()
+        return user == null ? null : UserDto.builder()
+                .id(Optional.ofNullable(user.getId()).orElse(null))
                 .name(user.getName())
                 .surname((user.getSurname()))
                 .password(user.getPassword())
